@@ -1,17 +1,17 @@
 elasticsearch:
-  image: elasticsearch:latest
+  image: elasticsearch:2.3.2
   command: elasticsearch -Des.network.host=0.0.0.0
   ports:
     - "9200:9200"
     - "9300:9300"
 logstash:
-  image: logstash:latest
+  image: logstash:2.3.2
   command: logstash -f /etc/logstash/conf.d/logstash.conf
   volumes:
     - ./logstash/config:/etc/logstash/conf.d
     - ./logstash/patterns/nginx:/etc/logstash/patterns/nginx
   ports:
-    - "5000:5000"
+    - "5555:5555"
   links:
     - elasticsearch
 kibana:
